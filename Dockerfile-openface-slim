@@ -1,6 +1,15 @@
-FROM marselester/opencv2:latest
+FROM marselester/opencv2-slim:latest
 MAINTAINER Marsel Mavletkulov <marselester@ya.ru>
 
+# Dlib
+RUN apt-get update -y && \
+    apt-get install -y libboost-all-dev && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN pip install --no-cache-dir -q dlib==19.4.0
+
+# Torch
 RUN wget -q -O install-deps https://raw.githubusercontent.com/torch/distro/master/install-deps && \
     echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/yes && \
     printf '#/bin/bash\n"$@"' > /usr/bin/sudo && \
@@ -23,6 +32,7 @@ RUN luarocks install nn && \
     luarocks install torchx && \
     luarocks install tds
 
+# OpenFace
 RUN cd && \
     git clone https://github.com/marselester/openface.git && \
     cd openface && \

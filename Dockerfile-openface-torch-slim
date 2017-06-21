@@ -1,4 +1,4 @@
-FROM marselester/opencv2:latest
+FROM marselester/opencv2-slim:latest
 MAINTAINER Marsel Mavletkulov <marselester@ya.ru>
 
 RUN wget -q -O install-deps https://raw.githubusercontent.com/torch/distro/master/install-deps && \

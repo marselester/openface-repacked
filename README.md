@@ -4,30 +4,31 @@ You can run OpenFace in Docker based on `bamos/openface` image,
 everything is pre-installed so it's easy to try demos.
 
 ```sh
-$ sudo docker pull bamos/openface
-$ sudo docker images --format='table {{.Repository}}\t{{.Size}}'
-REPOSITORY                    SIZE
-bamos/openface                1.941 GB
+$ docker pull bamos/openface
+$ docker images --format='table {{.Repository}}\t{{.Size}}'
+REPOSITORY                   SIZE
+bamos/openface               2.54 GB
+marselester/openface         1.59 GB
+marselester/openface-slim    1.5 GB
 ```
 
 If you only want to use `align_dlib.py` or `torch_neural_net.py` and wish to save space on storage,
 the following Docker images should suffice:
 
-* [Dockerfile][dockerfile-dlib] with OpenCV, Dlib and OpenFace Python libraries.
-* [Dockerfile][dockerfile-torch] with OpenCV, OpenFace Python libraries and Torch.
+* [Dockerfile][dockerfile-dlib-slim] with OpenCV, Dlib and OpenFace Python library.
+* [Dockerfile][dockerfile-torch-slim] with OpenCV, Torch, OpenFace Python library.
 
-It's rather faster to pull the images from Docker Hub, but you can build them yourself:
+You can build them as following:
 
 ```sh
-$ make build_opencv
-$ make build_openface_dlib
-$ make build_openface_torch
-$ sudo docker images --format='table {{.Repository}}\t{{.Size}}'
-REPOSITORY                    SIZE
-bamos/openface                1.941 GB
-marselester/openface-torch    1.43 GB
-marselester/openface-dlib     888.9 MB
-marselester/opencv2           554.6 MB
+$ make build_opencv_slim
+$ make build_openface_dlib_slim
+$ make build_openface_torch_slim
+$ docker images --format='table {{.Repository}}\t{{.Size}}'
+REPOSITORY                         SIZE
+marselester/opencv2-slim           559 MB
+marselester/openface-dlib-slim     887 MB
+marselester/openface-torch-slim    1.24 GB
 ```
 
 ## AlignDlib Example
@@ -93,5 +94,5 @@ root$ python measure_face.py images-aligned/clapton-2.jpg
 ```
 
 [openface]: https://github.com/cmusatyalab/openface
-[dockerfile-dlib]: ./Dockerfile-openface-dlib
-[dockerfile-torch]: ./Dockerfile-openface-torch
+[dockerfile-dlib-slim]: ./Dockerfile-openface-dlib-slim
+[dockerfile-torch-slim]: ./Dockerfile-openface-torch-slim

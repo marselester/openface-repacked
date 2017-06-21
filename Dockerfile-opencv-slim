@@ -1,4 +1,4 @@
-FROM python:2.7.13
+FROM python:2.7.13-slim
 MAINTAINER Marsel Mavletkulov <marselester@ya.ru>
 
 RUN apt-get update -y && \
